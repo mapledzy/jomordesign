@@ -1,17 +1,30 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-class Oreki extends React.Component {
+class Oreki extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      a: 'lorem inpsdsa',
+      data: [],
     };
+  }
+
+  onAddressSelect(pIndex, cIndex, aIndex) {
+    const data = this.getData();
+    const address = data[pIndex].name
+      + data[pIndex].city[cIndex].name
+      + data[pIndex].city[cIndex].area[aIndex];
+    // console.log(`address: ----->  ${address}`);
+    this.address = address;
+  }
+
+  getData() {
+    return this.state.data;
   }
 
   render() {
     return (
       <div>
-        {this.state.a}
+        {this.state.data[0]}
       </div>
     );
   }
