@@ -71,3 +71,11 @@ resolve: {
 ```
 ***
 把jsx编译到js需要调用一个函数, 这个函数在React叫React.createElement. 你可以比较一下jsx和编译出的js.
+***
+有了babel loader就不需要jsx-loader了，那是去年的事情了
+***
+resolve.extensions
+一个包含模块扩展名的数组。例如，为了发现CoffeeScript 文件，你的数组应该包含字符串".coffee"。
+
+Default: ["", ".webpack.js", ".web.js", ".js"] 
+注意：设置了这个选项，会取代默认的模块扩展名。重要的事情说三遍：意味着webpack不再用默认扩展名查找模块，意味着webpack不再用默认扩展名查找模块，意味着webpack不再用默认扩展名查找模块。如果你想正确加载一个带有扩展名的模块，你必须把一个空字符串放在你的数组里。如果你想不要扩展名来加载一个js文件，你需要将“.js”加入你的数组。

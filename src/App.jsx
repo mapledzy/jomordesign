@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
+import ajax from './ajax';
 
 class Oreki extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
+      data: ['hello,world!!!'],
     };
   }
 
@@ -17,14 +19,14 @@ class Oreki extends Component {
     this.address = address;
   }
 
-  getData() {
-    return this.state.data;
-  }
+  getData = () => this.state.data
+
 
   render() {
     return (
       <div>
-        {this.state.data[0]}
+        <h1>{this.state.data[0]}</h1>
+        <Button>getData</Button>
       </div>
     );
   }
