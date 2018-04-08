@@ -1,7 +1,16 @@
 body {
-    background-color: #EEEDBE
+  padding: 40px;
+  font-size: 14px
 }
 
-h1 {
-    color: #734444
+h3 {
+    color: #FF895D
+}
+
+.table td {
+  padding: 5px
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #0075ff29
 }
