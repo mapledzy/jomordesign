@@ -12,7 +12,7 @@ class Monster extends Component {
 
     this.monsters = monsters;
     this.list = Object.keys(monsters);
-    window.console.dir(this.monsters);
+    // window.console.dir(this.monsters);
   }
 
   render() {

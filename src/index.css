@@ -6,15 +6,3 @@ body {
 h1 {
     color: #FF895D
 }
-
-.table td {
-  padding: 5px
-}
-
-.table-striped tbody tr:nth-of-type(odd) {
-  background-color: #0075ff29
-}
-
-.container {
-  margin: 0 auto
-}

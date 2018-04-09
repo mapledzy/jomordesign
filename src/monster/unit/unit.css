@@ -3,7 +3,7 @@
   width: 600px;
   overflow: hidden;
   padding: 10px;
-  margin-bottom: 60px;
+  margin: 28px auto;
 }
 
 .unit-wrap .unit-img {
@@ -22,6 +22,10 @@
   float: left;
 }
 
-table,table tr th, table tr td { border:1px solid #0094ff; }
+table,table tr th, table tr td { border:1px solid #989898; }
 table { width: 100%; min-height: 25px; line-height: 25px; text-align: center; border-collapse: collapse;}
 caption {font-size: 1.3em; color: #fa7601;}
+
+tr.table-title {
+  background-color: #F9B248;
+}
