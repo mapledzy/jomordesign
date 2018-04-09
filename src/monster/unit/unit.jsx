@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+// import LazyLoad from 'react-lazy-load';
 import './unit.css';
 
 class Unit extends Component {
@@ -50,6 +51,12 @@ class Unit extends Component {
   render() {
     return (
       <div className="unit-wrap">
+
+        <div className="unit-img">
+          {/* <LazyLoad offsetVertical={2000} className="unit-img"> */}
+          <img src={require(`.${this.unit.picture}`)} alt={`${this.unit.monster_name}-图片`} />
+          {/* </LazyLoad> */}
+        </div>
 
         <div className="unit-table">
           <table>
