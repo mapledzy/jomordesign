@@ -7,7 +7,7 @@ module.exports = {
   entry: './src/index.jsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/img/',
+    publicPath: './',
     filename: 'bundle.js',
   },
   plugins: [
@@ -39,7 +39,7 @@ module.exports = {
       },
       {
         test: /\.(png|jpg)$/,
-        loader: 'url-loader?limit=5000',
+        loader: 'url-loader?limit=5000&name=img/[name].[ext]',
       },
     ],
   },
