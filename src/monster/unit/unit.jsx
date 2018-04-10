@@ -4,25 +4,26 @@ import LazyLoad from 'react-lazy-load';
 import './unit.css';
 
 function arabiSimplified(Num) {
-  for (let i = Num.length - 1; i >= 0; i--) {
-    Num = Num.replace(',', '');// 替换Num中的“,”
-    Num = Num.replace(' ', '');// 替换Num中的空格
+  const n = Number.parseInt(Num, 10);
+
+  if (Number.isNaN(n)) { // 验证输入的字符是否为数字
+    return 'Data Type Error! isNumber?';
   }
-  if (isNaN(Num)) { // 验证输入的字符是否为数字
-    // alert("请检查小写金额是否正确");
-    return;
-  }
+
   // 字符处理完毕后开始转换，采用前后两部分分别转换
-  const part = String(Num).split('.');
+  const part = String(n).split('.');
   let newchar = '';
+
   // 小数点前进行转化
-  for (let i = part[0].length - 1; i >= 0; i--) {
+  for (let i = part[0].length - 1; i >= 0; i -= 1) {
     if (part[0].length > 11) {
-      // alert("位数过大，无法计算");
-      return;
-    }// 若数量超过拾亿单位，提示
+      // 若数量超过百亿单位返回空字符串
+      return '';
+    }
+
     let tmpnewchar = '';
     const perchar = part[0].charAt(i);
+
     switch (perchar) {
       case '0': tmpnewchar = `0${tmpnewchar}`; break;
       case '1': tmpnewchar = `1${tmpnewchar}`; break;
@@ -38,15 +39,16 @@ function arabiSimplified(Num) {
       default:
         break;
     }
+
     switch (part[0].length - i - 1) {
       case 0: break;
-      case 1: if (perchar != 0) tmpnewchar += ''; break;
-      case 2: if (perchar != 0) tmpnewchar += ''; break;
-      case 3: if (perchar != 0) tmpnewchar += ''; break;
+      case 1: if (perchar !== 0) tmpnewchar += ''; break;
+      case 2: if (perchar !== 0) tmpnewchar += ''; break;
+      case 3: if (perchar !== 0) tmpnewchar += ''; break;
       case 4: tmpnewchar += '万'; break;
-      case 5: if (perchar != 0) tmpnewchar += ''; break;
-      case 6: if (perchar != 0) tmpnewchar += ''; break;
-      case 7: if (perchar != 0) tmpnewchar += ''; break;
+      case 5: if (perchar !== 0) tmpnewchar += ''; break;
+      case 6: if (perchar !== 0) tmpnewchar += ''; break;
+      case 7: if (perchar !== 0) tmpnewchar += ''; break;
       case 8: tmpnewchar += '亿'; break;
       case 9: tmpnewchar += ''; break;
       case 10: tmpnewchar += ''; break;
@@ -56,22 +58,10 @@ function arabiSimplified(Num) {
     }
     newchar = tmpnewchar + newchar;
   }
-  // 替换所有无用汉字，直到没有此类无用的数字为止
-  while (newchar.search('零零') != -1 || newchar.search('零亿') != -1 || newchar.search('亿万') != -1 || newchar.search('零万') != -1) {
-    newchar = newchar.replace('零亿', '亿');
-    newchar = newchar.replace('亿万', '亿');
-    newchar = newchar.replace('零万', '万');
-    newchar = newchar.replace('零零', '零');
-  }
-  // 替换以“一十”开头的，为“十”
-  if (newchar.indexOf('一十') == 0) {
-    newchar = newchar.substr(1);
-  }
-  // 替换以“零”结尾的，为“”
-  if (newchar.lastIndexOf('零') == newchar.length - 1) {
-    newchar = newchar.substr(0, newchar.length - 1);
-  }
+
+  // 删除数据后四位的0000,此处没有加判断 如果数据的后四位不是零也会被删除
   newchar = newchar.substring(0, newchar.length - 4);
+
   return newchar;
 }
 
@@ -126,7 +116,9 @@ class Unit extends Component {
 
         <div className="unit-img">
           <LazyLoad offsetVertical={2000} className="unit-img">
+            {/* eslint-disable global-require, import/no-dynamic-require  */}
             <img src={require(`.${this.unit.picture}`)} alt={`${this.unit.monster_name}-图片`} />
+            {/* eslint-enable global-require, import/no-dynamic-require */}
           </LazyLoad>
         </div>
 
@@ -155,10 +147,10 @@ class Unit extends Component {
               </tr>
 
               <tr>
-                <td>{this.unit.fire_attr_resistance}</td>
-                <td>{this.unit.ice_attr_resistance}</td>
-                <td>{this.unit.light_attr_resistance}</td>
-                <td>{this.unit.dark_attr_resistance}</td>
+                <td>{this.unit.fire_attr_resistance > 10000 ? 'MAX' : this.unit.fire_attr_resistance}</td>
+                <td>{this.unit.ice_attr_resistance > 10000 ? 'MAX' : this.unit.ice_attr_resistance}</td>
+                <td>{this.unit.light_attr_resistance > 10000 ? 'MAX' : this.unit.light_attr_resistance}</td>
+                <td>{this.unit.dark_attr_resistance > 10000 ? 'MAX' : this.unit.dark_attr_resistance}</td>
               </tr>
 
             </tbody>
